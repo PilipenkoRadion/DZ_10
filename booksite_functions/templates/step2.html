@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Шаг 2</title>
+</head>
+
+<body>
+    <h1>Детали книги (Шаг 2)</h1>
+
+    {% if messages %}
+    {% for message in messages %}
+    <p style="color: red;">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="description" placeholder="Описание"></textarea><br><br>
+
+        <select name="stock">
+            <option value="y">В наличии</option>
+            <option value="n">Нет в наличии</option>
+        </select><br><br>
+
+        <select name="category">
+            {% for cat in categories %}
+            <option value="{{ cat.id }}">{{ cat.name }}</option>
+            {% empty %}
+            <option disabled>Категории отсутствуют</option>
+            {% endfor %}
+        </select><br><br>
+
+        <button type="submit">Создать книгу</button>
+    </form>
+    <br>
+    <a href="{% url 'step1' %}">Назад</a>
+</body>
+
+</html>
