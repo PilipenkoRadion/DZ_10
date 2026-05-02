@@ -3,8 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Book, Category
 from django.contrib import messages as django_messages
 from .forms import Step1Form
-
-
+from django.db.models import Q, Count, Avg
 def step1(request):
     form = Step1Form()
     if request.method == "POST":
@@ -114,4 +113,18 @@ def step2(request):
 
 def home(request):
     books = Book.objects.all()
-    return render(request, "home.html", {"books": books})
+
+    stock_filter = request.GET.get("stock")
+    if stock_filter:
+        books = books.filter(stock=stock_filter)
+
+    category_filter = request.GET.get("category")
+    if category_filter:
+        books = books.filter(category__id=category_filter)
+
+    search = request.GET.get("search")
+    if search:
+        books = books.filter(Q(title__icontains=search) | Q(author__icontains=search))
+    
+    categories = Category.objects.annotate(book_count=Count("books"))
+    return render(request, "home.html", {"books": books, "categories": categories})

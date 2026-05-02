@@ -31,6 +31,7 @@
 
 <body>
     <h1>Каталог книг</h1>
+
     {% if messages %}
     {% for message in messages %}
     <p class="success">{{ message }}</p>
@@ -38,6 +39,28 @@
     {% endif %}
 
     <a href="{% url 'step1' %}">+ Добавить новую книгу</a>
+
+    <form method="GET">
+        <input type="text" name="search" placeholder="Поиск по названию или автору"
+            value="{{ request.GET.search|default:'' }}">
+
+        <select name="stock">
+            <option value="">Все</option>
+            <option value="y" {% if request.GET.stock == "y" %}selected{% endif %}>В наличии</option>
+            <option value="n" {% if request.GET.stock == "n" %}selected{% endif %}>Нет в наличии</option>
+        </select>
+
+        <select name="category">
+            <option value="">Все категории</option>
+            {% for cat in categories %}
+            <option value="{{ cat.id }}" {% if request.GET.category == cat.id|stringformat:"i" %}selected{% endif %}>
+                {{ cat.name }} ({{ cat.book_count }})
+            </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Найти</button>
+    </form>
 
     <table>
         <thead>
@@ -47,6 +70,7 @@
                 <th>Категория</th>
                 <th>Цена</th>
                 <th>Описание</th>
+                <th>Наличие</th>
             </tr>
         </thead>
         <tbody>
@@ -57,6 +81,7 @@
                 <td>{{ book.category.name }}</td>
                 <td>{{ book.price }} грн.</td>
                 <td>{{ book.description|truncatechars:50 }}</td>
+                <td>{% if book.stock == "y" %}В наличии{% else %}Нет в наличии{% endif %}</td>
             </tr>
             {% empty %}
             <tr>
