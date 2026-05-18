@@ -19,8 +19,15 @@ class Book(models.Model):
         ("n", "out_of_stock")
     ]
     title = models.CharField(max_length=20)
+    photo = models.ImageField(upload_to="books/", blank=True, null=True)
     author = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.CharField(max_length=150)
     stock = models.CharField(max_length=1, choices=STOCK_CHOICES, default="y")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="books", null=True)
+
+
+
+
+
+

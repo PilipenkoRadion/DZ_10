@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Добавить книгу{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <a href="{% url 'books:book-list' %}" class="btn btn-outline-secondary mb-3">
+            <i class="bi bi-arrow-left"></i> Назад
+        </a>
+        <div class="card p-4">
+            <h2 class="fw-bold mb-4"><i class="bi bi-plus-circle"></i> Добавить книгу</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">{{ field.label }}</label>
+                    {% if field.field.widget.input_type == "select" %}
+                    <select name="{{ field.html_name }}" class="form-select {% if field.errors %}is-invalid{% endif %}">
+                        {% for value, label in field.field.choices %}
+                        <option value="{{ value }}" {% if field.value|stringformat:"s"==value|stringformat:"s"%}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <input type="{{ field.field.widget.input_type }}" name="{{ field.html_name }}"
+                        value="{{ field.value|default:'' }}"
+                        class="form-control {% if field.errors %}is-invalid{% endif %}">
+                    {% endif %}
+                    {% if field.errors %}
+                    <div class="invalid-feedback d-block">{{ field.errors.0 }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-gold w-100 mt-2">
+                    <i class="bi bi-check-lg"></i> Добавить книгу
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

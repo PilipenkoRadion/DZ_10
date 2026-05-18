@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Удалить книгу{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card p-4 text-center border-danger">
+            <h2 class="fw-bold mt-2 text-danger"><i class="bi bi-exclamation-triangle"></i> Удалить книгу?</h2>
+            <p class="fs-5 mt-2">
+                Вы уверены, что хотите удалить книгу<br>
+                <strong>«{{ object.title }}»</strong>?
+            </p>
+            <p class="text-muted">Это действие нельзя отменить.</p>
+            <form method="post" class="d-flex gap-2 justify-content-center mt-3">
+                {% csrf_token %}
+                <a href="{% url 'books:book-list' %}" class="btn btn-outline-secondary flex-fill">
+                    <i class="bi bi-x-lg"></i> Отмена
+                </a>
+                <button type="submit" class="btn btn-danger flex-fill">
+                    <i class="bi bi-trash"></i> Да, удалить
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
