@@ -1,12 +1,16 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 # Create your views here.
 from .models import Book, Category
 from django.contrib import messages as django_messages
-from .forms import Step1Form
 from django.db.models import Q, Count, Avg
 from django.urls import reverse_lazy
-
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from .forms import Step1Form, LoginForm, RegisterForm
+import logging
+logger = logging.getLogger("booksite_functions")
 
 
 class BookListView(ListView):
@@ -33,25 +37,53 @@ class BookDetailView(DetailView):
     context_object_name = "books_d"
 
 class BookCreateView(CreateView):
+    permission_required = "booksite_functions.create_book"
     model = Book
     template_name = "book_create.html"
     fields = ["title", "author", "price", "description", "stock", "category"]
     success_url = reverse_lazy("books:book-list")
 
 class BookUpdateView(UpdateView):
+    permission_required = "booksite_functions.update_book"
     model = Book
     template_name = "book_update.html"
     fields = ["title", "author", "price", "description", "stock", "category", "photo"]
     success_url = reverse_lazy("books:book-list")
 
 class BookDeleteView(DeleteView):
+    permission_required = "booksite_functions.delete_book"
     model = Book
     template_name = "book_delete.html"
     success_url = reverse_lazy("books:book-list")
 
 
 
+def register_views(request):
+    if request.user.is_authenticated:
+        return redirect("books:home")
+    form = RegisterForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        user = form.save()
+        login(request, user)
+        logger.info("Новый пользователь зарегестрирован: %s", user.username)
+        return redirect("books:home")
+    return render(request, "register.html", {"form": form})
 
+def login_views(request):
+    if request.user.is_authenticated:
+        return redirect("books:home")
+    form = LoginForm(data=request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        login(request,  form.get_user())
+        logger.info("Вы успешно вошли %s", form.get_user())
+        return redirect(request.GET.get("next", "books:home"))
+    return render(request, "login.html", {"form": form})
+def logout_views(request):
+    if request.method == "POST":
+        logger.info("Вы успешно вышли из вашего аккаунта! %s", request.user)
+        logout(request)
+    return redirect("books:home")
+    pass
 
 
 
@@ -145,7 +177,7 @@ def step2(request):
             return redirect("books:step2")
         
 
-        category_obj = get_object_or_404(Category, id=category_id)
+    
 
         Book.objects.create(
             title=request.session["reg_title"],
@@ -159,7 +191,6 @@ def step2(request):
 
         for i in steps_keys:
             del request.session[i]
-        request.session.flush()
         django_messages.success(request, "Вы успешно добавили книгу в каталог!")
         return redirect("books:home")
     

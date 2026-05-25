@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 
@@ -27,7 +27,21 @@ class Book(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="books", null=True)
 
 
+class CustomUser(AbstractUser):
+    class Role(models.TextChoices):
+        VIEWER = "viewer", "Читатель"
+        EDITOR = "editor", "Редактор"
+        ADMIN  = "admin",  "Админ"
 
+    role = models.CharField(
+        max_length=20,
+        choices=Role.choices,
+        default=Role.VIEWER,
+    )
 
+    @property
+    def is_editor(self):
+        return self.role in (self.Role.EDITOR, self.Role.ADMIN)
 
-
+    def __str__(self):
+        return self.username
