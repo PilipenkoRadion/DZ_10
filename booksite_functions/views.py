@@ -36,21 +36,21 @@ class BookDetailView(DetailView):
     template_name = "book_detail.html"
     context_object_name = "books_d"
 
-class BookCreateView(CreateView):
+class BookCreateView(PermissionRequiredMixin, CreateView):
     permission_required = "booksite_functions.create_book"
     model = Book
     template_name = "book_create.html"
     fields = ["title", "author", "price", "description", "stock", "category"]
     success_url = reverse_lazy("books:book-list")
 
-class BookUpdateView(UpdateView):
+class BookUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = "booksite_functions.update_book"
     model = Book
     template_name = "book_update.html"
     fields = ["title", "author", "price", "description", "stock", "category", "photo"]
     success_url = reverse_lazy("books:book-list")
 
-class BookDeleteView(DeleteView):
+class BookDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = "booksite_functions.delete_book"
     model = Book
     template_name = "book_delete.html"
