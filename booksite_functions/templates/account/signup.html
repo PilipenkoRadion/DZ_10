@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Войти — Riebook{% endblock %}
+{% block title %}Регистрация — Riebook{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center mt-4">
@@ -9,8 +9,8 @@
 
                 <div class="text-center mb-4">
                     <i class="bi bi-book-half fs-1 text-warning"></i>
-                    <h4 class="fw-bold mt-2">Вход в Riebook</h4>
-                    <p class="text-muted small">Рады видеть вас снова!</p>
+                    <h4 class="fw-bold mt-2">Регистрация в Riebook</h4>
+                    <p class="text-muted small">Создайте аккаунт чтобы продолжить</p>
                 </div>
 
                 <form method="post">
@@ -28,7 +28,7 @@
                     {% endfor %}
 
                     <button type="submit" class="btn btn-dark w-100 fw-bold mt-2">
-                        <i class="bi bi-box-arrow-in-right me-2"></i>Войти
+                        <i class="bi bi-person-plus me-2"></i>Зарегистрироваться
                     </button>
                 </form>
 
@@ -41,11 +41,10 @@
                 </a>
 
                 <hr class="my-3">
-
                 <p class="text-center small mb-0">
-                    Нет аккаунта?
-                    <a href="{% url 'books:register' %}" class="text-warning fw-semibold text-decoration-none">
-                        Зарегистрироваться
+                    Уже есть аккаунт?
+                    <a href="{% url 'books:login' %}" class="text-warning fw-semibold text-decoration-none">
+                        Войти
                     </a>
                 </p>
 
