@@ -9,3 +9,16 @@ INFO 2026-05-28 22:34:18,899 views Вы успешно вошли Riebook
 INFO 2026-05-29 22:56:27,448 views Вы успешно вышли из вашего аккаунта! Riebook
 INFO 2026-05-29 22:58:24,264 views Вы успешно вышли из вашего аккаунта! Riebook
 INFO 2026-05-29 22:59:36,648 views Вы успешно вышли из вашего аккаунта! Riebook
+INFO 2026-05-29 23:19:15,954 middleware [AnonymousUser] GET / -> 200 (578.5 ms)
+INFO 2026-05-29 23:19:20,625 middleware [AnonymousUser] GET /login/ -> 200 (145.3 ms)
+INFO 2026-05-29 23:19:22,954 middleware [AnonymousUser] GET /account/google/login/ -> 302 (221.9 ms)
+INFO 2026-05-29 23:19:29,450 middleware [AnonymousUser] GET /account/google/login/callback/?state=2T7a7YFaAG3ZDAmV&iss=https%3A%2F%2Faccounts.google.com&code=4%2F0AeoWuM_I7VxhHjPq8a7q386bOvQGivKzQOWll4GSyZFgWBFofimH7vsZAU3Mop0gfOqMNQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&prompt=consent -> 401 (713.5 ms)
+INFO 2026-05-29 23:19:31,478 middleware [AnonymousUser] GET /account/login/ -> 200 (195.3 ms)
+INFO 2026-05-29 23:19:32,821 middleware [AnonymousUser] GET /account/signup/ -> 200 (203.6 ms)
+INFO 2026-05-29 23:19:33,910 middleware [AnonymousUser] GET /account/signup/ -> 200 (163.5 ms)
+INFO 2026-05-29 23:19:34,163 middleware [AnonymousUser] GET /account/signup/ -> 200 (187.9 ms)
+INFO 2026-05-29 23:19:37,198 middleware [AnonymousUser] GET /account/login/ -> 200 (133.6 ms)
+INFO 2026-05-29 23:19:41,582 middleware [AnonymousUser] GET /account/login/ -> 200 (160.5 ms)
+INFO 2026-05-29 23:19:47,503 middleware [AnonymousUser] GET /account/login/ -> 200 (145.2 ms)
+INFO 2026-05-29 23:19:52,250 middleware [Riebook] POST /account/login/ -> 302 (2393.3 ms)
+INFO 2026-05-29 23:19:52,442 middleware [Riebook] GET / -> 200 (127.2 ms)
