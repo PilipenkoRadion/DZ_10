@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 # Create your views here.
 from .models import Book, Category
@@ -10,7 +10,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .forms import Step1Form, LoginForm, RegisterForm
 import logging
+import stripe
+from .models import Order, OrderItem, Book
+from .cart import Cart
+from django.conf import settings
+from django.db import transaction
+from django.urls import reverse
+from django.core.mail import send_mail
 logger = logging.getLogger("booksite_functions")
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class BookListView(ListView):
@@ -100,6 +109,7 @@ def step1(request):
             request.session["reg_price"] = str(form.cleaned_data["price"])
             return redirect("books:step2")
     return render(request, "step1.html", {"form": form})
+
 
 
 
@@ -223,8 +233,101 @@ def home(request):
 
 
 
+def cart_add(request, book_id):
+    cart = Cart(request)
+    book = get_object_or_404(Book, id=book_id)
+    cart.add(book=book, quantity=1, override_quantity=False)
+    return redirect('books:cart_detail')
+
+def cart_remove(request, book_id):
+    cart = Cart(request)
+    book = get_object_or_404(Book, id=book_id)
+    cart.remove(book)
+    return redirect('books:cart_detail')
 
 
+def cart_detail(request):
+    cart = Cart(request)
+    return render(request, 'cart_detail.html', {'cart': cart})
+
+def order_create(request):
+    cart = Cart(request)
+    if not cart:
+        return redirect('book_list')
+
+    if request.method == 'POST':
+        first_name = request.POST.get('first_name')
+        last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
+
+        try:
+            with transaction.atomic():
+                order = Order.objects.create(
+                    user=request.user if request.user.is_authenticated else None,
+                    first_name=first_name,
+                    last_name=last_name,
+                    email=email
+                )
+                for item in cart:
+                    OrderItem.objects.create(
+                        order=order,
+                        book=item['book'],
+                        price=item['price'],
+                        quantity=item['quantity']
+                    )
+                cart.clear()
+
+            subject = f'Замовлення №{order.id}'
+            message = f'Шановний {order.first_name},\n\nВи успішно оформили замовлення №{order.id}.'
+            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [order.email])
+
+            return redirect('books:payment_process', order_id=order.id)
+
+        except Exception as e:
+            return render(request, 'order_error.html', {'error': str(e)})
+
+    return render(request, 'order_create_form.html', {'cart': cart})
+
+def payment_process(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    success_url = request.build_absolute_uri(reverse('books:payment_success')) + f"?order_id={order.id}"
+    cancel_url = request.build_absolute_uri(reverse('books:payment_cancel'))
+
+
+    session_data = {
+        'mode': 'payment',
+        'success_url': success_url,
+        'cancel_url': cancel_url,
+        'line_items': []
+    }
+
+    for item in order.items.all():
+        session_data['line_items'].append({
+            'price_data': {
+                'unit_amount': int(item.price * 100),
+                'currency': 'uah',
+                'product_data': {
+                    'name': item.book.title,
+                },
+            },
+            'quantity': item.quantity,
+        })
+
+    session = stripe.checkout.Session.create(**session_data)
+    order.stripe_id = session.id
+    order.save()
+    return redirect(session.url, code=303)
+
+def payment_success(request):
+    order_id = request.GET.get('order_id')
+    if order_id:
+        order = get_object_or_004(Order, id=order_id)
+        order.paid = True
+        order.save()
+    return render(request, 'payment_success.html')
+
+def payment_cancel(request):
+    return render(request, 'payment_cancel.html')
 
 
 

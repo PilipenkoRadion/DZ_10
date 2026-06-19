@@ -4,14 +4,26 @@
 
 {% block content %}
 
-<div class="page-header">
-    <h1 class="mb-0">
-        <img src="{% static 'Riebook-logo.png' %}" height="40" class="me-2">Riebook
-    </h1>
-    <p class="mb-0 mt-1" style="color:#ccc;">Здесь и маленькие и большые книги</p>
+<div class="page-header d-flex justify-content-between align-items-center">
+    <div>
+        <h1 class="mb-0">
+            <img src="{% static 'Riebook-logo.png' %}" height="40" class="me-2">Riebook
+        </h1>
+        <p class="mb-0 mt-1" style="color:#ccc;">Здесь и маленькие и большие книги</p>
+    </div>
+    <div>
+        <a href="{% url 'books:cart_detail' %}" class="btn btn-outline-dark position-relative">
+            <i class="bi bi-cart3"></i> Корзина
+            {% if cart %}
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ cart|length }}
+            </span>
+            {% endif %}
+        </a>
+    </div>
 </div>
 
-<div class="card mb-4 shadow-sm">
+<div class="card mb-4 shadow-sm mt-3">
     <div class="card-body">
         <form method="GET" class="row g-2 align-items-end">
             <div class="col-md-4">
@@ -32,7 +44,7 @@
                 <select name="category" class="form-select">
                     <option value="">Все категории</option>
                     {% for cat in categories %}
-                    <option value="{{ cat.id }}" {% if request.GET.category == cat.id|stringformat:"i" %}selected{% endif%}>
+                    <option value="{{ cat.id }}" {% if request.GET.category == cat.id|stringformat:"i" %}selected{% endif %}>
                         {{ cat.name }} ({{ cat.book_count }})
                     </option>
                     {% endfor %}
@@ -90,6 +102,11 @@
                             <a href="{% url 'books:book-detail' book.pk %}" class="btn btn-sm btn-outline-dark">
                                 <i class="bi bi-eye"></i>
                             </a>
+                            {% if book.stock == "y" %}
+                            <a href="{% url 'books:cart_add' book.id %}" class="btn btn-sm btn-success">
+                                <i class="bi bi-cart-plus"></i>
+                            </a>
+                            {% endif %}
                             <a href="{% url 'books:book-update' book.pk %}" class="btn btn-sm btn-outline-warning">
                                 <i class="bi bi-pencil"></i>
                             </a>

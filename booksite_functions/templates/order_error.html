@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Ошибка оформления заказа</h1>
+<p style="color: red;">{{ error }}</p>
+<a href="{% url 'books:order_create' %}">Попробовать снова</a>
+{% endblock %}

@@ -71,6 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'booksite_functions.context_processors.cart',
+
             ],
         },
     },
@@ -144,3 +146,17 @@ LOGGING = {
         },
     },
 }
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "pilipenko_radion@sc-90.ukr.education"
+EMAIL_HOST_PASSWORD = "rguj hagr mbqb ueum"
+DEFAULT_FROM_EMAIL = "pilipenko_radion@sc-90.ukr.education"
+
+
+CART_SESSION_ID = 'cart'
+
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', 'pk_test_...')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', 'sk_test_...')

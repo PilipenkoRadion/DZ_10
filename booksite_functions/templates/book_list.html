@@ -50,17 +50,27 @@
                         <span class="badge badge-stock-n">Нет в наличии</span>
                         {% endif %}
                     </div>
-                    <div class="card-footer bg-transparent d-flex gap-2">
-                        <a href="{% url 'books:book-detail' book.pk %}" class="btn btn-sm btn-outline-dark flex-fill">
-                            <i class="bi bi-eye"></i> Подробнее
+                    <div class="card-footer bg-transparent d-flex flex-column gap-2">
+                        <div class="d-flex gap-2">
+                            <a href="{% url 'books:book-detail' book.pk %}"
+                                class="btn btn-sm btn-outline-dark flex-fill">
+                                <i class="bi bi-eye"></i> Подробнее
+                            </a>
+                            <a href="{% url 'books:book-update' book.pk %}"
+                                class="btn btn-sm btn-outline-warning flex-fill">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="{% url 'books:book-delete' book.pk %}"
+                                class="btn btn-sm btn-outline-danger flex-fill">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                        {% if book.stock == "y" %}
+                        <a href="{% url 'books:cart_add' book.id %}" class="btn btn-sm btn-success w-100">
+
+                            <i class="bi bi-cart-plus"></i> В корзину
                         </a>
-                        <a href="{% url 'books:book-update' book.pk %}"
-                            class="btn btn-sm btn-outline-warning flex-fill">
-                            <i class="bi bi-pencil"></i>
-                        </a>
-                        <a href="{% url 'books:book-delete' book.pk %}" class="btn btn-sm btn-outline-danger flex-fill">
-                            <i class="bi bi-trash"></i>
-                        </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

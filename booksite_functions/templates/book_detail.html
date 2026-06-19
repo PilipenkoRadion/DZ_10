@@ -38,6 +38,12 @@
             <p class="mb-3">{{ books_d.description }}</p>
             <p class="fw-bold fs-2 text-success">{{ books_d.price }} грн.</p>
             <div class="d-flex gap-2 mt-2">
+                {% if books_d.stock == "y" %}
+                <a href="{% url 'books:cart_add' books_d.id %}" class="btn btn-success flex-fill">
+
+                    <i class="bi bi-cart-plus"></i> Добавить в корзину
+                </a>
+                {% endif %}
                 <a href="{% url 'books:book-update' books_d.pk %}" class="btn btn-warning">
                     <i class="bi bi-pencil"></i> Редактировать
                 </a>

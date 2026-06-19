@@ -1,6 +1,6 @@
 from django.contrib import admin
 # Register your models here.
-from .models import Book, Category
+from .models import Book, Category, Order, OrderItem
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
@@ -23,3 +23,14 @@ class CategoryAdmin(admin.ModelAdmin):
     inlines = [BookInline]
 
 
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    raw_id_fields = ['book']
+    extra = 0
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ['id', 'first_name', 'last_name', 'email', 'paid', 'created_at', 'updated_at']
+    list_filter = ['paid', 'created_at', 'updated_at']
+    inlines = [OrderItemInline]

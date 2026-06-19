@@ -17,6 +17,14 @@ urlpatterns = [
     path("login/", views.login_views, name="login"),
     path("register/", views.register_views, name="register"),
     path("logout/", views.logout_views, name="logout"),
+    path("cart/", views.cart_detail, name="cart_detail"),
+    path("cart/add/<int:book_id>/", views.cart_add, name="cart_add"),
+    path("cart/remove/<int:book_id>/", views.cart_remove, name="cart_remove"),
+    path("order/create/", views.order_create, name="order_create"),
+    path("payment/process/<int:order_id>/", views.payment_process, name="payment_process"),
+    path("payment/success/", views.payment_success, name="payment_success"),
+    path("payment/cancel/", views.payment_cancel, name="payment_cancel"),
+
 ] 
 
 if settings.DEBUG:
