@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Войти — Riebook{% endblock %}
+{% load i18n %}
+{% block title %}{% translate "Log In" %} — Riebook{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center mt-4">
@@ -9,8 +10,8 @@
 
                 <div class="text-center mb-4">
                     <i class="bi bi-book-half fs-1 text-warning"></i>
-                    <h4 class="fw-bold mt-2">Вход в Riebook</h4>
-                    <p class="text-muted small">Рады видеть вас снова!</p>
+                    <h4 class="fw-bold mt-2">{% translate "Log In to Riebook" %}</h4>
+                    <p class="text-muted small">{% translate "Glad to see you again!" %}</p>
                 </div>
 
                 <form method="post">
@@ -28,24 +29,24 @@
                     {% endfor %}
 
                     <button type="submit" class="btn btn-dark w-100 fw-bold mt-2">
-                        <i class="bi bi-box-arrow-in-right me-2"></i>Войти
+                        <i class="bi bi-box-arrow-in-right me-2"></i>{% translate "Log In" %}
                     </button>
                 </form>
 
                 <hr class="my-3 text-muted">
-                <p class="text-center text-muted small mb-2">или войдите через</p>
+                <p class="text-center text-muted small mb-2">{% translate "or log in via" %}</p>
 
                 <a href="{% url 'google_login' %}" class="btn btn-outline-dark w-100">
                     <img src="https://developers.google.com/identity/images/g-logo.png" width="18" class="me-2">
-                    Войти через Google
+                    {% translate "Log In with Google" %}
                 </a>
 
                 <hr class="my-3">
 
                 <p class="text-center small mb-0">
-                    Нет аккаунта?
+                    {% translate "Don't have an account?" %}
                     <a href="{% url 'books:register' %}" class="text-warning fw-semibold text-decoration-none">
-                        Зарегистрироваться
+                        {% translate "Register" %}
                     </a>
                 </p>
 

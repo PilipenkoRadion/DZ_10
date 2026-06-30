@@ -1,9 +1,10 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ LANGUAGE_CODE }}">
 
 <head>
     <meta charset="UTF-8">
-    <title>Шаг 2</title>
+    <title>{% translate "Step 2" %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 
@@ -11,15 +12,15 @@
 
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="{% url 'books:home' %}">Книжный магазин</a>
-            <a href="{% url 'books:home' %}" class="btn btn-outline-light btn-sm">← На главную</a>
+            <a class="navbar-brand fw-bold" href="{% url 'books:home' %}">{% translate "Book Store" %}</a>
+            <a href="{% url 'books:home' %}" class="btn btn-outline-light btn-sm">← {% translate "To home" %}</a>
         </div>
     </nav>
 
     <div class="container mt-4" style="max-width: 500px;">
         <div class="card shadow-sm">
             <div class="card-body">
-                <h4 class="card-title mb-4">Детали книги (Шаг 2)</h4>
+                <h4 class="card-title mb-4">{% translate "Book Details (Step 2)" %}</h4>
 
                 {% if messages %}
                 {% for message in messages %}
@@ -31,38 +32,38 @@
                     {% csrf_token %}
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Описание</label>
+                        <label class="form-label fw-semibold">{% translate "Description" %}</label>
                         <textarea name="description" class="form-control" rows="3"
-                            placeholder="Описание книги (до 150 символов)"></textarea>
+                            placeholder="{% translate 'Book description (up to 150 characters)' %}"></textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Наличие</label>
+                        <label class="form-label fw-semibold">{% translate "Availability" %}</label>
                         <select name="stock" class="form-select">
-                            <option value="y">В наличии</option>
-                            <option value="n">Нет в наличии</option>
+                            <option value="y">{% translate "In stock" %}</option>
+                            <option value="n">{% translate "Out of stock" %}</option>
                         </select>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Категория</label>
+                        <label class="form-label fw-semibold">{% translate "Category" %}</label>
                         <select name="category" class="form-select">
                             {% for cat in categories %}
                             <option value="{{ cat.id }}">{{ cat.name }}</option>
                             {% empty %}
-                            <option disabled>Категории отсутствуют</option>
+                            <option disabled>{% translate "No categories available" %}</option>
                             {% endfor %}
                         </select>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Фото книги</label>
+                        <label class="form-label fw-semibold">{% translate "Book photo" %}</label>
                         <input type="file" name="photo" class="form-control" accept="image/*">
                     </div>
 
                     <div class="d-flex justify-content-between mt-3">
-                        <a href="{% url 'books:step1' %}" class="btn btn-outline-secondary">← Назад</a>
-                        <button type="submit" class="btn btn-success fw-bold">Создать книгу</button>
+                        <a href="{% url 'books:step1' %}" class="btn btn-outline-secondary">← {% translate "Back" %}</a>
+                        <button type="submit" class="btn btn-success fw-bold">{% translate "Create book" %}</button>
                     </div>
                 </form>
             </div>

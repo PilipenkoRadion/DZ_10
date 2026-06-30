@@ -1,19 +1,21 @@
 {% extends "base.html" %}
+{% load i18n %}
+
 {% block content %}
-<h1>Корзина товаров</h1>
+<h1>{% translate "Shopping Cart" %}</h1>
 
 <ul>
     {% for item in cart %}
     <li>
-        {{ item.book.title }} — {{ item.quantity }} шт. — {{ item.total_price }} грн.
-        <a href="{% url 'books:cart_remove' item.book.id %}">Удалить</a>
+        {{ item.book.title }} — {{ item.quantity }} {% translate "pcs." %} — {{ item.total_price }} {% translate "UAH" %}
+        <a href="{% url 'books:cart_remove' item.book.id %}">{% translate "Delete" %}</a>
     </li>
     {% empty %}
-    <li>Корзина пуста</li>
+    <li>{% translate "Your cart is empty" %}</li>
     {% endfor %}
 </ul>
-<h3>Итого: {{ cart.get_total_price }} грн.</h3>
+<h3>{% translate "Total" %}: {{ cart.get_total_price }} {% translate "UAH" %}</h3>
 {% if cart %}
-<a href="{% url 'books:order_create' %}">Оформить заказ</a>
+<a href="{% url 'books:order_create' %}">{% translate "Checkout" %}</a>
 {% endif %}
 {% endblock %}

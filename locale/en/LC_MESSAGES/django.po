@@ -1,0 +1,408 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-06-30 20:20+0000\n"
+"PO-Revision-Date: 2026-06-30 22:30+0000\n"
+"Last-Translator: Radion Pylypenko\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: booksite/settings.py:108
+msgid "Ukrainian"
+msgstr "Ukrainian"
+
+#: booksite/settings.py:109
+msgid "English"
+msgstr "English"
+
+#: booksite_functions/forms.py:7
+msgid "Book title"
+msgstr "Book title"
+
+#: booksite_functions/forms.py:8 booksite_functions/models.py:26
+#: booksite_functions/templates/home.html:70
+msgid "Author"
+msgstr "Author"
+
+#: booksite_functions/forms.py:9 booksite_functions/models.py:27
+#: booksite_functions/templates/home.html:72
+msgid "Price"
+msgstr "Price"
+
+#: booksite_functions/forms.py:13
+msgid "Email"
+msgstr "Email"
+
+#: booksite_functions/forms.py:19 booksite_functions/forms.py:28
+msgid "Username"
+msgstr "Username"
+
+#: booksite_functions/forms.py:20 booksite_functions/forms.py:29
+msgid "Password"
+msgstr "Password"
+
+#: booksite_functions/forms.py:21
+msgid "Password confirmation"
+msgstr "Password confirmation"
+
+#: booksite_functions/models.py:21
+#: booksite_functions/templates/book_detail.html:32
+#: booksite_functions/templates/book_list.html:49
+#: booksite_functions/templates/home.html:39
+#: booksite_functions/templates/home.html:96
+#: booksite_functions/templates/step2.html:43
+msgid "In stock"
+msgstr "In stock"
+
+#: booksite_functions/models.py:22
+#: booksite_functions/templates/book_detail.html:34
+#: booksite_functions/templates/book_list.html:51
+#: booksite_functions/templates/home.html:40
+#: booksite_functions/templates/home.html:98
+#: booksite_functions/templates/step2.html:44
+msgid "Out of stock"
+msgstr "Out of stock"
+
+#: booksite_functions/models.py:24 booksite_functions/templates/home.html:69
+msgid "Title"
+msgstr "Title"
+
+#: booksite_functions/models.py:25 booksite_functions/templates/home.html:68
+msgid "Photo"
+msgstr "Photo"
+
+#: booksite_functions/models.py:28
+#: booksite_functions/templates/book_detail.html:38
+#: booksite_functions/templates/home.html:73
+#: booksite_functions/templates/step2.html:35
+msgid "Description"
+msgstr "Description"
+
+#: booksite_functions/models.py:29
+msgid "Stock status"
+msgstr "Stock status"
+
+#: booksite_functions/models.py:30
+#: booksite_functions/templates/book_detail.html:26
+#: booksite_functions/templates/home.html:44
+#: booksite_functions/templates/home.html:71
+#: booksite_functions/templates/step2.html:49
+msgid "Category"
+msgstr "Category"
+
+#: booksite_functions/models.py:33
+msgid "Book"
+msgstr "Book"
+
+#: booksite_functions/models.py:34
+msgid "Books"
+msgstr "Books"
+
+#: booksite_functions/templates/base.html:59
+msgid "Home"
+msgstr "Home"
+
+#: booksite_functions/templates/base.html:60
+msgid "Catalog"
+msgstr "Catalog"
+
+#: booksite_functions/templates/base.html:63
+#: booksite_functions/templates/book_create.html:3
+#: booksite_functions/templates/book_create.html:12
+#: booksite_functions/templates/book_create.html:35
+msgid "Add book"
+msgstr "Add book"
+
+#: booksite_functions/templates/base.html:70
+msgid "Log Out"
+msgstr "Log Out"
+
+#: booksite_functions/templates/base.html:75
+#: booksite_functions/templates/login.html:3
+#: booksite_functions/templates/login.html:32
+#: booksite_functions/templates/register.html:46
+msgid "Log In"
+msgstr "Log In"
+
+#: booksite_functions/templates/base.html:78
+#: booksite_functions/templates/login.html:49
+#: booksite_functions/templates/register.html:3
+#: booksite_functions/templates/register.html:13
+msgid "Register"
+msgstr "Register"
+
+#: booksite_functions/templates/book_create.html:9
+#: booksite_functions/templates/step1.html:35
+#: booksite_functions/templates/step2.html:65
+msgid "Back"
+msgstr "Back"
+
+#: booksite_functions/templates/book_delete.html:3
+msgid "Delete book"
+msgstr "Delete book"
+
+#: booksite_functions/templates/book_delete.html:9
+msgid "Delete book?"
+msgstr "Delete book?"
+
+#: booksite_functions/templates/book_delete.html:11
+msgid "Are you sure you want to delete the book"
+msgstr "Are you sure you want to delete the book"
+
+#: booksite_functions/templates/book_delete.html:14
+msgid "This action cannot be undone."
+msgstr "This action cannot be undone."
+
+#: booksite_functions/templates/book_delete.html:18
+msgid "Cancel"
+msgstr "Cancel"
+
+#: booksite_functions/templates/book_delete.html:21
+msgid "Yes, delete"
+msgstr "Yes, delete"
+
+#: booksite_functions/templates/book_detail.html:9
+msgid "Back to list"
+msgstr "Back to list"
+
+#: booksite_functions/templates/book_detail.html:30
+#: booksite_functions/templates/home.html:36
+#: booksite_functions/templates/home.html:74
+#: booksite_functions/templates/step2.html:41
+msgid "Availability"
+msgstr "Availability"
+
+#: booksite_functions/templates/book_detail.html:40
+#: booksite_functions/templates/book_list.html:47
+#: booksite_functions/templates/cart_detail.html:10
+#: booksite_functions/templates/cart_detail.html:17
+#: booksite_functions/templates/home.html:92
+msgid "UAH"
+msgstr "UAH"
+
+#: booksite_functions/templates/book_detail.html:44
+#: booksite_functions/templates/book_list.html:71
+msgid "Add to cart"
+msgstr "Add to cart"
+
+#: booksite_functions/templates/book_detail.html:48
+msgid "Edit"
+msgstr "Edit"
+
+#: booksite_functions/templates/book_detail.html:51
+#: booksite_functions/templates/cart_detail.html:11
+msgid "Delete"
+msgstr "Delete"
+
+#: booksite_functions/templates/book_list.html:3
+msgid "All books"
+msgstr "All books"
+
+#: booksite_functions/templates/book_list.html:7
+msgid "Book Catalog"
+msgstr "Book Catalog"
+
+#: booksite_functions/templates/book_list.html:8
+msgid "Books found"
+msgstr "Books found"
+
+#: booksite_functions/templates/book_list.html:14
+msgid "Filters"
+msgstr "Filters"
+
+#: booksite_functions/templates/book_list.html:18
+#: booksite_functions/templates/home.html:46
+msgid "All categories"
+msgstr "All categories"
+
+#: booksite_functions/templates/book_list.html:58
+msgid "Details"
+msgstr "Details"
+
+#: booksite_functions/templates/book_list.html:79
+#: booksite_functions/templates/home.html:123
+msgid "No books found."
+msgstr "No books found."
+
+#: booksite_functions/templates/book_list.html:91
+msgid "Previous"
+msgstr "Previous"
+
+#: booksite_functions/templates/book_list.html:103
+#: booksite_functions/templates/step1.html:36
+msgid "Next"
+msgstr "Next"
+
+#: booksite_functions/templates/book_list.html:108
+msgid "Page"
+msgstr "Page"
+
+#: booksite_functions/templates/book_list.html:108
+msgid "of"
+msgstr "of"
+
+#: booksite_functions/templates/cart_detail.html:5
+msgid "Shopping Cart"
+msgstr "Shopping Cart"
+
+#: booksite_functions/templates/cart_detail.html:10
+msgid "pcs."
+msgstr "pcs."
+
+#: booksite_functions/templates/cart_detail.html:14
+msgid "Your cart is empty"
+msgstr "Your cart is empty"
+
+#: booksite_functions/templates/cart_detail.html:17
+msgid "Total"
+msgstr "Total"
+
+#: booksite_functions/templates/cart_detail.html:19
+#: booksite_functions/templates/order_create_form.html:5
+msgid "Checkout"
+msgstr "Checkout"
+
+#: booksite_functions/templates/home.html:13
+msgid "Both small and big books are here"
+msgstr "Both small and big books are here"
+
+#: booksite_functions/templates/home.html:17
+msgid "Cart"
+msgstr "Cart"
+
+#: booksite_functions/templates/home.html:31
+msgid "Search"
+msgstr "Search"
+
+#: booksite_functions/templates/home.html:32
+msgid "Title or author..."
+msgstr "Title or author..."
+
+#: booksite_functions/templates/home.html:38
+msgid "All"
+msgstr "All"
+
+#: booksite_functions/templates/home.html:56
+msgid "Find"
+msgstr "Find"
+
+#: booksite_functions/templates/home.html:75
+msgid "Actions"
+msgstr "Actions"
+
+#: booksite_functions/templates/login.html:13
+msgid "Log In to Riebook"
+msgstr "Log In to Riebook"
+
+#: booksite_functions/templates/login.html:14
+msgid "Glad to see you again!"
+msgstr "Glad to see you again!"
+
+#: booksite_functions/templates/login.html:37
+msgid "or log in via"
+msgstr "or log in via"
+
+#: booksite_functions/templates/login.html:41
+msgid "Log In with Google"
+msgstr "Log In with Google"
+
+#: booksite_functions/templates/login.html:47
+msgid "Don't have an account?"
+msgstr "Don't have an account?"
+
+#: booksite_functions/templates/order_create_form.html:9
+msgid "First name"
+msgstr "First name"
+
+#: booksite_functions/templates/order_create_form.html:13
+msgid "Last name"
+msgstr "Last name"
+
+#: booksite_functions/templates/order_create_form.html:20
+msgid "Pay via Stripe"
+msgstr "Pay via Stripe"
+
+#: booksite_functions/templates/order_error.html:5
+msgid "Order Placement Error"
+msgstr "Order Placement Error"
+
+#: booksite_functions/templates/order_error.html:7
+msgid "Try again"
+msgstr "Try again"
+
+#: booksite_functions/templates/payment_cancel.html:5
+msgid "Payment Canceled"
+msgstr "Payment Canceled"
+
+#: booksite_functions/templates/payment_cancel.html:6
+msgid "The Stripe payment process was interrupted. You can try again."
+msgstr "The Stripe payment process was interrupted. You can try again."
+
+#: booksite_functions/templates/payment_success.html:5
+msgid "Payment Successful!"
+msgstr "Payment Successful!"
+
+#: booksite_functions/templates/payment_success.html:6
+msgid ""
+"Your order has been successfully paid. Please check your email for "
+"confirmation."
+msgstr "Your order has been successfully paid. Please check your email for confirmation."
+
+#: booksite_functions/templates/register.html:14
+msgid "Create an account and start managing your library"
+msgstr "Create an account and start managing your library"
+
+#: booksite_functions/templates/register.html:37
+msgid "Create account"
+msgstr "Create account"
+
+#: booksite_functions/templates/register.html:44
+msgid "Already have an account?"
+msgstr "Already have an account?"
+
+#: booksite_functions/templates/step1.html:7
+msgid "Step 1"
+msgstr "Step 1"
+
+#: booksite_functions/templates/step1.html:15
+#: booksite_functions/templates/step2.html:15
+msgid "Book Store"
+msgstr "Book Store"
+
+#: booksite_functions/templates/step1.html:16
+#: booksite_functions/templates/step2.html:16
+msgid "To home"
+msgstr "To home"
+
+#: booksite_functions/templates/step1.html:23
+msgid "Add book (Step 1)"
+msgstr "Add book (Step 1)"
+
+#: booksite_functions/templates/step2.html:7
+msgid "Step 2"
+msgstr "Step 2"
+
+#: booksite_functions/templates/step2.html:23
+msgid "Book Details (Step 2)"
+msgstr "Book Details (Step 2)"
+
+#: booksite_functions/templates/step2.html:37
+msgid "Book description (up to 150 characters)"
+msgstr "Book description (up to 150 characters)"
+
+#: booksite_functions/templates/step2.html:54
+msgid "No categories available"
+msgstr "No categories available"
+
+#: booksite_functions/templates/step2.html:60
+msgid "Book photo"
+msgstr "Book photo"
+
+#: booksite_functions/templates/step2.html:66
+msgid "Create book"
+msgstr "Create book"

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Регистрация — Riebook{% endblock %}
+{% load i18n %}
+{% block title %}{% translate "Register" %} — Riebook{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center mt-4">
@@ -9,8 +10,8 @@
 
                 <div class="text-center mb-4">
                     <i class="bi bi-person-plus-fill fs-1 text-warning"></i>
-                    <h4 class="fw-bold mt-2">Регистрация</h4>
-                    <p class="text-muted small">Создайте аккаунт и начните вести библиотеку</p>
+                    <h4 class="fw-bold mt-2">{% translate "Register" %}</h4>
+                    <p class="text-muted small">{% translate "Create an account and start managing your library" %}</p>
                 </div>
 
                 <form method="post">
@@ -33,16 +34,16 @@
                     {% endfor %}
 
                     <button type="submit" class="btn btn-warning w-100 fw-bold mt-2">
-                        <i class="bi bi-person-check-fill me-2"></i>Создать аккаунт
+                        <i class="bi bi-person-check-fill me-2"></i>{% translate "Create account" %}
                     </button>
                 </form>
 
                 <hr class="my-3">
 
                 <p class="text-center small mb-0">
-                    Уже есть аккаунт?
+                    {% translate "Already have an account?" %}
                     <a href="{% url 'books:login' %}" class="text-warning fw-semibold text-decoration-none">
-                        Войти
+                        {% translate "Log In" %}
                     </a>
                 </p>
 

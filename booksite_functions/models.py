@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
@@ -17,16 +18,23 @@ class Category(models.Model):
 
 class Book(models.Model):
     STOCK_CHOICES = [
-        ("y", "in_stock"),
-        ("n", "out_of_stock")
+        ("y", _("In stock")),
+        ("n", _("Out of stock"))
     ]
-    title = models.CharField(max_length=20)
-    photo = models.ImageField(upload_to="books/", blank=True, null=True)
-    author = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    description = models.CharField(max_length=150)
-    stock = models.CharField(max_length=1, choices=STOCK_CHOICES, default="y")
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="books", null=True)
+    title = models.CharField(max_length=20, verbose_name=_("Title"))
+    photo = models.ImageField(upload_to="books/", blank=True, null=True, verbose_name=_("Photo"))
+    author = models.TextField(verbose_name=_("Author"))
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Price"))
+    description = models.CharField(max_length=150, verbose_name=_("Description"))
+    stock = models.CharField(max_length=1, choices=STOCK_CHOICES, default="y", verbose_name=_("Stock status"))
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="books", null=True, verbose_name=_("Category"))
+
+    class Meta:
+        verbose_name = _("Book")
+        verbose_name_plural = _("Books")
+
+    def __str__(self):
+        return self.title
 
 
 class CustomUser(AbstractUser):

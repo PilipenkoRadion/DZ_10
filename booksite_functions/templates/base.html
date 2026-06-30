@@ -1,6 +1,7 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ LANGUAGE_CODE }}">
 
 <head>
     <meta charset="UTF-8">
@@ -44,6 +45,11 @@
             padding: 20px;
             box-shadow: 0 1px 4px rgba(0, 0, 0, .1);
         }
+
+        .lang-switch-form select {
+            width: auto;
+            display: inline-block;
+        }
     </style>
 </head>
 
@@ -55,28 +61,40 @@
                 <img src="{% static 'Riebook-logo.png' %}" height="32" class="me-2">
             </a>
             <div class="d-flex gap-2 align-items-center">
-                <a href="{% url 'books:home' %}" class="btn btn-outline-light btn-sm">Главная</a>
-                <a href="{% url 'books:book-list' %}" class="btn btn-outline-light btn-sm">Каталог</a>
+                <a href="{% url 'books:home' %}" class="btn btn-outline-light btn-sm">{% translate "Home" %}</a>
+                <a href="{% url 'books:book-list' %}" class="btn btn-outline-light btn-sm">{% translate "Catalog" %}</a>
 
                 {% if user.is_authenticated %}
-                <a href="{% url 'books:step1' %}" class="btn btn-warning btn-sm">+ Добавить книгу</a>
+                <a href="{% url 'books:step1' %}" class="btn btn-warning btn-sm">+ {% translate "Add book" %}</a>
                 <span class="text-light small">
                     <i class="bi bi-person-circle me-1"></i>{{ user.username }}
                 </span>
                 <form method="post" action="{% url 'books:logout' %}" class="m-0">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-outline-danger btn-sm">
-                        <i class="bi bi-box-arrow-right me-1"></i>Выйти
+                        <i class="bi bi-box-arrow-right me-1"></i>{% translate "Log Out" %}
                     </button>
                 </form>
                 {% else %}
                 <a href="{% url 'books:login' %}" class="btn btn-outline-light btn-sm">
-                    <i class="bi bi-box-arrow-in-right me-1"></i>Войти
+                    <i class="bi bi-box-arrow-in-right me-1"></i>{% translate "Log In" %}
                 </a>
                 <a href="{% url 'books:register' %}" class="btn btn-warning btn-sm fw-bold">
-                    Регистрация
+                    {% translate "Register" %}
                 </a>
                 {% endif %}
+
+                <form action="{% url 'set_language' %}" method="post" class="lang-switch-form m-0">
+                    {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ request.path }}">
+                    {% get_current_language as CURRENT_LANGUAGE %}
+                    {% get_available_languages as LANGUAGES %}
+                    <select name="language" class="form-select form-select-sm" onchange="this.form.submit()">
+                        {% for code, name in LANGUAGES %}
+                        <option value="{{ code }}" {% if code == CURRENT_LANGUAGE %}selected{% endif %}>{{ name }}</option>
+                        {% endfor %}
+                    </select>
+                </form>
             </div>
         </div>
     </nav>

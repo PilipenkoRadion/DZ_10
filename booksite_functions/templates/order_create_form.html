@@ -1,20 +1,22 @@
 {% extends "base.html" %}
+{% load i18n %}
+
 {% block content %}
-<h1>Оформление заказа</h1>
+<h1>{% translate "Checkout" %}</h1>
 <form method="post" action="">
     {% csrf_token %}
     <div>
-        <label>Имя:</label>
+        <label>{% translate "First name" %}:</label>
         <input type="text" name="first_name" required>
     </div>
     <div>
-        <label>Фамилия:</label>
+        <label>{% translate "Last name" %}:</label>
         <input type="text" name="last_name" required>
     </div>
     <div>
         <label>Email:</label>
         <input type="email" name="email" required>
     </div>
-    <button type="submit">Оплатить через Stripe</button>
+    <button type="submit">{% translate "Pay via Stripe" %}</button>
 </form>
 {% endblock %}

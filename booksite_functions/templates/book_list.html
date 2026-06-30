@@ -1,20 +1,21 @@
 {% extends "base.html" %}
-{% block title %}Все книги{% endblock %}
+{% load i18n %}
+{% block title %}{% translate "All books" %}{% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1 class="mb-0"><i class="bi bi-books"></i> Каталог книг</h1>
-    <p class="mb-0 mt-1" style="color:#ccc;">Найдено книг: {{ paginator.count }}</p>
+    <h1 class="mb-0"><i class="bi bi-books"></i> {% translate "Book Catalog" %}</h1>
+    <p class="mb-0 mt-1" style="color:#ccc;">{% translate "Books found" %}: {{ paginator.count }}</p>
 </div>
 
 <div class="row">
     <div class="col-md-3 mb-4">
         <div class="filter-sidebar">
-            <h5 class="fw-bold mb-3"><i class="bi bi-funnel"></i> Фильтры</h5>
+            <h5 class="fw-bold mb-3"><i class="bi bi-funnel"></i> {% translate "Filters" %}</h5>
             <div class="d-flex flex-column gap-2">
                 <a href="{% url 'books:book-list' %}"
                     class="btn btn-sm {% if not request.GET.category %}btn-dark{% else %}btn-outline-secondary{% endif %}">
-                    Все категории
+                    {% translate "All categories" %}
                 </a>
                 {% for category in categories %}
                 <a href="?category={{ category.slug }}"
@@ -43,18 +44,18 @@
                         <h5 class="card-title fw-bold">{{ book.title }}</h5>
                         <p class="text-muted mb-1"><i class="bi bi-person"></i> {{ book.author }}</p>
                         <p class="mb-1"><i class="bi bi-tag"></i> {{ book.category }}</p>
-                        <p class="fw-bold text-success fs-5">{{ book.price }} грн.</p>
+                        <p class="fw-bold text-success fs-5">{{ book.price }} {% translate "UAH" %}</p>
                         {% if book.stock == "y" %}
-                        <span class="badge badge-stock-y">В наличии</span>
+                        <span class="badge badge-stock-y">{% translate "In stock" %}</span>
                         {% else %}
-                        <span class="badge badge-stock-n">Нет в наличии</span>
+                        <span class="badge badge-stock-n">{% translate "Out of stock" %}</span>
                         {% endif %}
                     </div>
                     <div class="card-footer bg-transparent d-flex flex-column gap-2">
                         <div class="d-flex gap-2">
                             <a href="{% url 'books:book-detail' book.pk %}"
                                 class="btn btn-sm btn-outline-dark flex-fill">
-                                <i class="bi bi-eye"></i> Подробнее
+                                <i class="bi bi-eye"></i> {% translate "Details" %}
                             </a>
                             <a href="{% url 'books:book-update' book.pk %}"
                                 class="btn btn-sm btn-outline-warning flex-fill">
@@ -67,8 +68,7 @@
                         </div>
                         {% if book.stock == "y" %}
                         <a href="{% url 'books:cart_add' book.id %}" class="btn btn-sm btn-success w-100">
-
-                            <i class="bi bi-cart-plus"></i> В корзину
+                            <i class="bi bi-cart-plus"></i> {% translate "Add to cart" %}
                         </a>
                         {% endif %}
                     </div>
@@ -76,7 +76,7 @@
             </div>
             {% empty %}
             <div class="col-12">
-                <div class="alert alert-info"><i class="bi bi-info-circle"></i> Книги не найдены.</div>
+                <div class="alert alert-info"><i class="bi bi-info-circle"></i> {% translate "No books found." %}</div>
             </div>
             {% endfor %}
         </div>
@@ -88,25 +88,24 @@
                 <li class="page-item">
                     <a class="page-link"
                         href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.previous_page_number }}">&laquo;
-                        Назад</a>
+                        {% translate "Previous" %}</a>
                 </li>
                 {% endif %}
                 {% for num in paginator.page_range %}
                 <li class="page-item {% if page_obj.number == num %}active{% endif %}">
                     <a class="page-link"
-                        href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ num }}">{{
-                        num }}</a>
+                        href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ num }}">{{ num }}</a>
                 </li>
                 {% endfor %}
                 {% if page_obj.has_next %}
                 <li class="page-item">
                     <a class="page-link"
-                        href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.next_page_number }}">Вперёд
+                        href="?{% if request.GET.category %}category={{ request.GET.category }}&{% endif %}page={{ page_obj.next_page_number }}">{% translate "Next" %}
                         &raquo;</a>
                 </li>
                 {% endif %}
             </ul>
-            <p class="text-center text-muted">Страница {{ page_obj.number }} из {{ paginator.num_pages }}</p>
+            <p class="text-center text-muted">{% translate "Page" %} {{ page_obj.number }} {% translate "of" %} {{ paginator.num_pages }}</p>
         </nav>
         {% endif %}
     </div>

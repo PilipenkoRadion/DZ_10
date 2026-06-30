@@ -6,11 +6,11 @@ from . import views
 app_name = "books"
 
 urlpatterns = [
-    path("step1/", views.step1, name="step1"),
+    path("step1/", views.async_step1, name="step1"),
     path("step2/", views.step2, name="step2"),
     path("", views.home, name="home"),
-    path("books/", views.BookListView.as_view(), name="book-list"),
-    path("books/<int:pk>/", views.BookDetailView.as_view(), name="book-detail"),
+    path("books/", views.async_book_list, name="book-list"),
+    path("books/<int:pk>/", views.async_book_detail, name="book-detail"),
     path("books/create/", views.BookCreateView.as_view(), name="book-create"),
     path("books/<int:pk>/update/", views.BookUpdateView.as_view(), name="book-update"),
     path("books/<int:pk>/delete/", views.BookDeleteView.as_view(), name="book-delete"),
@@ -24,8 +24,7 @@ urlpatterns = [
     path("payment/process/<int:order_id>/", views.payment_process, name="payment_process"),
     path("payment/success/", views.payment_success, name="payment_success"),
     path("payment/cancel/", views.payment_cancel, name="payment_cancel"),
-
-] 
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

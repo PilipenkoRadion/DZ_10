@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
+
 {% block content %}
-<h1>Оплата отменена</h1>
-<p>Процесс оплаты через Stripe был прерван. Вы можете попробовать снова.</p>
+<h1>{% translate "Payment Canceled" %}</h1>
+<p>{% translate "The Stripe payment process was interrupted. You can try again." %}</p>
 {% endblock %}
