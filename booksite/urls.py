@@ -3,19 +3,23 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("i18n/", include("django.conf.urls.i18n")),
     path("api/", include("booksite_functions.api_urls")),
     path("", include(("booksite_functions.urls", "books"))),
-    path('account/', include("allauth.urls"))
+    path('account/', include("allauth.urls")),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
+        path('sentry-debug/', trigger_error),
     ]
-
-if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
