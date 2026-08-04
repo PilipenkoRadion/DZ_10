@@ -1,4 +1,4 @@
-from .settings import *
+from settings.development import *
 
 SECRET_KEY = 'django-insecure-test-key-not-for-production'
 
