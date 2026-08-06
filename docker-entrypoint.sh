@@ -1,11 +1,10 @@
-#!/bin/bash
 set -e
-echo "Начало ура ..."
+echo "Начало запуска, немного подождите"
 python manage.py collectstatic --noinput
 
-echo "Миграций к базе данных ..."
+echo "Миграций к базе данных"
 
 python manage.py migrate --noinput
 
-echo "Запускаем ваш проект ..."
+echo "Запускаем ваш проект, почти уже готово ..."
 exec python manage.py runserver 0.0.0.0:8000

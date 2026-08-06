@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from booksite_functions.views import health_check
 
 
 def trigger_error(request):
@@ -14,6 +15,7 @@ urlpatterns = [
     path("api/", include("booksite_functions.api_urls")),
     path("", include(("booksite_functions.urls", "books"))),
     path('account/', include("allauth.urls")),
+    path('health/', health_check, name='health-check'),
 ]
 
 if settings.DEBUG:

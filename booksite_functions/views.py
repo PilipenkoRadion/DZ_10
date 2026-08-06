@@ -16,11 +16,30 @@ from django.conf import settings
 from django.db import transaction
 from django.urls import reverse
 from django.core.mail import send_mail
-from django.http import Http404
+from django.http import Http404, JsonResponse
+from django.db import connections
+from django.db.utils import OperationalError
 
 logger = logging.getLogger("booksite_functions")
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+def health_check(request):
+    db_ok = True
+    try:
+        connections['default'].cursor()
+    except OperationalError:
+        db_ok = False
+
+    status = 200 if db_ok else 503
+    return JsonResponse(
+        {
+            "status": "ok" if db_ok else "error",
+            "database": db_ok,
+        },
+        status=status,
+    )
 
 
 class BookListView(ListView):
