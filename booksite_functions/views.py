@@ -345,3 +345,6 @@ def payment_success(request):
 
 def payment_cancel(request):
     return render(request, 'payment_cancel.html')
+
+
+# dz 33.1
