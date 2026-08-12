@@ -270,3 +270,9 @@ if SENTRY_DSN:
         send_default_pii=False,
         environment=os.getenv('ENVIRONMENT', 'production'),
     )
+
+
+
+KRONYR_API_URL = os.getenv('KRONYR_API_URL', 'http://localhost:8000')
+KRONYR_SERVICE_TOKEN = os.getenv('KRONYR_SERVICE_TOKEN', '')
+KRONYR_CHANNEL_ID = os.getenv('KRONYR_CHANNEL_ID', '1')

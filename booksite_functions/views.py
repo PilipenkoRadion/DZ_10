@@ -8,6 +8,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from .forms import Step1Form, LoginForm, RegisterForm
+from .services.kronyr_client import get_channel_stats
 import logging
 import stripe
 from .models import Order, OrderItem, Book
@@ -243,7 +244,13 @@ def home(request):
         books = books.filter(Q(title__icontains=search) | Q(author__icontains=search))
 
     categories = Category.objects.annotate(book_count=Count("books"))
-    return render(request, "home.html", {"books": books, "categories": categories})
+    channel_stats = get_channel_stats()
+
+    return render(request, "home.html", {
+        "books": books,
+        "categories": categories,
+        "channel_stats": channel_stats,
+    })
 
 
 def cart_add(request, book_id):
